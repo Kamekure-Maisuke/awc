@@ -2,7 +2,7 @@
 
 BEGIN{
 	if(ARGC<=1){
-		print "作成数を指定してください。(例:awk -f make_sample_json.awk 10)"
+		print "作成数を指定してください。(例:awk -f make_json_data.awk 10)"
 		exit
 	} else if(ARGC>2){
 		print "引数が多い。"
