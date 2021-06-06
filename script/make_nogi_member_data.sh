@@ -16,10 +16,6 @@ grep -E -B 1 '<td>[ぁ-ん]+ .+</td>' |
 sed -e '/--/d' -e 's/<a href=.\{1,\} title=.\{1,\}">//g' |
 awk -F '[<>]' '
 {
-	if(NR%2){
-		ORS=" "
-	}else {
-		ORS="\n"
-	}
+	ORS=(NR%2) ? "\t" : "\n"
 	print $3
 }'
