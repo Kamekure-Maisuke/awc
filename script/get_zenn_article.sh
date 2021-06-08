@@ -18,11 +18,12 @@ error_getuser(){
 # reponse format xml
 reponse_xml_format(){
 	xmllint --format --nocdata -	|
-	grep -e '<title>' -e '<link>'	|
+	grep -e '<title>' -e '<link>' -e '<pubDate>'	|
+	sed '1,4d' |
 	awk -F '[<>]' '
-	NR>=5{
-		if(NR%2){
-			ORS=" "
+	{
+		if(NR%3){
+			ORS="\t"
 		}else {
 			ORS="\n"
 		}
