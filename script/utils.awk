@@ -1,6 +1,6 @@
 # awk utils script
 
-BEGIN{ urlencode(ARGV[1]) }
+BEGIN{ printf urlencode(ARGV[1]) }
 
 # 対象文字列のURLエンコード
 function urlencode(s){
@@ -12,14 +12,15 @@ function urlencode(s){
 	close(command)
 	gsub("^ +","",d)
 	split(d,da," ")
+	result=""
 	for(i=1;i<=length(da);i++){
 		if(da[i] ~ /[0-9]{2}/){
-			printf da[i]
+			result=result""da[i]
 		}else {
-			printf "%%" toupper(da[i])
+			result=result "" "%%" toupper(da[i])
 		}
 	}
-
+	return result
 }
 
 # 対象文字列のURLデコード
