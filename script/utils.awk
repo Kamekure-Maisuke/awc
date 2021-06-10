@@ -1,6 +1,6 @@
 # awk utils script
 
-BEGIN{ printf urldecode(urlencode(ARGV[1])) }
+BEGIN{ print time_from_gmt("Mon, 01 Feb 2021 11:15:07 GMT") }
 
 # 対象文字列のURLエンコード
 function urlencode(s){
@@ -35,6 +35,21 @@ function urldecode(s){
 	command | getline result
 	close(command)
 	return result
+}
+
+function time_from_gmt(g){
+	if(s=="error"){
+		error("not gmt")
+	}
+	split("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec",m," ")
+	for(i=1;i<=length(m);i++){
+		ma[m[i]]=i
+	}
+	gsub(/:|,/,"",g)
+	split(g,ga," ")
+	time=sprintf("%04d%02d%02d%06d",ga[4],ma[ga[3]],ga[2],ga[5])
+	return time
+
 }
 
 # エラーメッセージ関数
