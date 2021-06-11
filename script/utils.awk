@@ -1,6 +1,6 @@
 # awk utils script
 
-BEGIN{ print time_from_gmt("Mon, 01 Feb 2021 11:15:07 GMT") }
+BEGIN{ print time_from_gmt(ARGV[1]) }
 
 # 対象文字列のURLエンコード
 function urlencode(s){
@@ -38,7 +38,7 @@ function urldecode(s){
 }
 
 function time_from_gmt(g){
-	if(s=="error"){
+	if(g==""){
 		error("not gmt")
 	}
 	split("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec",m," ")
