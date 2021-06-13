@@ -1,13 +1,13 @@
 # awk utils script
 
-BEGIN{ print time_from_gmt(ARGV[1]) }
+BEGIN{ print urldecode(ARGV[1]) }
 
 # 対象文字列のURLエンコード
 function urlencode(s){
 	if(s==""){
 		error("エンコード対象を指定してください。")
 	}
-	command="printf " s " | od -tx1 -An"
+	command="printf " s " | od -tx1 -An | xargs"
 	command | getline d
 	close(command)
 	gsub("^ +","",d)
@@ -17,7 +17,7 @@ function urlencode(s){
 		if(da[i] ~ /[0-9]{2}/){
 			result=result""da[i]
 		}else {
-			result=result "" "%%" toupper(da[i])
+			result=result "" "%" toupper(da[i])
 		}
 	}
 	return result
