@@ -10,7 +10,6 @@ function urlencode(s){
 	command="printf " s " | od -tx1 -An | xargs"
 	command | getline d
 	close(command)
-	gsub("^ +","",d)
 	split(d,da," ")
 	result=""
 	for(i=1;i<=length(da);i++){
