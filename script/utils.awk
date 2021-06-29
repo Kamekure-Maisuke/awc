@@ -36,6 +36,7 @@ function urldecode(s){
 	return result
 }
 
+# GMT形式を数字時間に変更
 function time_from_gmt(g){
 	if(g==""){
 		error("not gmt")
@@ -49,6 +50,21 @@ function time_from_gmt(g){
 	time=sprintf("%04d%02d%02d%06d",ga[4],ma[ga[3]],ga[2],ga[5])
 	return time
 
+}
+
+# ランダム文字列生成
+function random_string(cn,  i,  n,  word){
+  if(cn == ""){
+    print "error"
+    exit
+  }
+  w="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXXYZ123456789"
+  count=split(w,a,"")
+  for(i=1;i<=cn;i++){
+    n=int(rand()*count)
+    word = word a[n]
+  }
+  return word
 }
 
 # エラーメッセージ関数
