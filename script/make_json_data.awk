@@ -9,11 +9,22 @@ BEGIN{
 		exit
 	}
 	srand()
-	random_string="LC_ALL=C tr -dc '[:alnum:]' </dev/urandom | head -c 5"  # ランダム文字列生成
+	printf "["
 	for(i=1;i<=ARGV[1];i++){
-		random_string | getline name  # ランダム生成結果をnameへ格納
-		close(random_string)          # メモリ枯渇防止のため。
-		score=rand()*1000             # ランダムスコア
-		printf("{\"id\": %d,\"name\": %s,\"score\":%d}\n",i,name,score)
+		printf("%s{\"id\": %d,\"name\": \"%s\"}",separator,i,random_string(10))
+		separator=","
 	}
+	print "]"
+}
+
+function random_string(cn,  i,  word){
+	if(cn==""){
+		print "error"
+		exit(1)
+	}
+	count=split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789",wa,"")
+	for(i=1;i<=cn;i++){
+		word = word wa[int(rand()*count)]
+	}
+	return word
 }
